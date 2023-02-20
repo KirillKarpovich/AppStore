@@ -13,6 +13,13 @@
 		6821BBFA29A380C900807C50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6821BBF829A380C900807C50 /* Main.storyboard */; };
 		6821BBFC29A380CB00807C50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6821BBFB29A380CB00807C50 /* Assets.xcassets */; };
 		6821BBFF29A380CB00807C50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6821BBFD29A380CB00807C50 /* LaunchScreen.storyboard */; };
+		6821BC0729A3839F00807C50 /* ASTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6821BC0629A3839F00807C50 /* ASTabBarController.swift */; };
+		6821BC0929A3868F00807C50 /* ASTodayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6821BC0829A3868F00807C50 /* ASTodayVC.swift */; };
+		6821BC0B29A3869900807C50 /* ASAppsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6821BC0A29A3869900807C50 /* ASAppsVC.swift */; };
+		6821BC0D29A386A300807C50 /* ASSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6821BC0C29A386A300807C50 /* ASSearchVC.swift */; };
+		6821BC1129A39B5800807C50 /* SearchResutlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6821BC1029A39B5800807C50 /* SearchResutlCell.swift */; };
+		6821BC1429A39DDA00807C50 /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6821BC1329A39DDA00807C50 /* VerticalStackView.swift */; };
+		6821BC1629A3A6C200807C50 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6821BC1529A3A6C200807C50 /* UIView+Layout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +31,13 @@
 		6821BBFB29A380CB00807C50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6821BBFE29A380CB00807C50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6821BC0029A380CB00807C50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6821BC0629A3839F00807C50 /* ASTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTabBarController.swift; sourceTree = "<group>"; };
+		6821BC0829A3868F00807C50 /* ASTodayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTodayVC.swift; sourceTree = "<group>"; };
+		6821BC0A29A3869900807C50 /* ASAppsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASAppsVC.swift; sourceTree = "<group>"; };
+		6821BC0C29A386A300807C50 /* ASSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASSearchVC.swift; sourceTree = "<group>"; };
+		6821BC1029A39B5800807C50 /* SearchResutlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResutlCell.swift; sourceTree = "<group>"; };
+		6821BC1329A39DDA00807C50 /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
+		6821BC1529A3A6C200807C50 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +70,46 @@
 		6821BBF129A380C900807C50 /* AppStore */ = {
 			isa = PBXGroup;
 			children = (
+				6821BC1229A39DB400807C50 /* Helpers */,
+				6821BC0F29A39B0E00807C50 /* Views */,
 				6821BBF229A380C900807C50 /* AppDelegate.swift */,
 				6821BBF429A380C900807C50 /* SceneDelegate.swift */,
 				6821BBF629A380C900807C50 /* ViewController.swift */,
+				6821BC0E29A39B0000807C50 /* Controllers */,
 				6821BBF829A380C900807C50 /* Main.storyboard */,
 				6821BBFB29A380CB00807C50 /* Assets.xcassets */,
 				6821BBFD29A380CB00807C50 /* LaunchScreen.storyboard */,
 				6821BC0029A380CB00807C50 /* Info.plist */,
 			);
 			path = AppStore;
+			sourceTree = "<group>";
+		};
+		6821BC0E29A39B0000807C50 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6821BC0629A3839F00807C50 /* ASTabBarController.swift */,
+				6821BC0829A3868F00807C50 /* ASTodayVC.swift */,
+				6821BC0A29A3869900807C50 /* ASAppsVC.swift */,
+				6821BC0C29A386A300807C50 /* ASSearchVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6821BC0F29A39B0E00807C50 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6821BC1029A39B5800807C50 /* SearchResutlCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6821BC1229A39DB400807C50 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6821BC1329A39DDA00807C50 /* VerticalStackView.swift */,
+				6821BC1529A3A6C200807C50 /* UIView+Layout.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +184,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6821BBF729A380C900807C50 /* ViewController.swift in Sources */,
+				6821BC1429A39DDA00807C50 /* VerticalStackView.swift in Sources */,
+				6821BC0D29A386A300807C50 /* ASSearchVC.swift in Sources */,
+				6821BC0729A3839F00807C50 /* ASTabBarController.swift in Sources */,
+				6821BC1629A3A6C200807C50 /* UIView+Layout.swift in Sources */,
+				6821BC0B29A3869900807C50 /* ASAppsVC.swift in Sources */,
+				6821BC0929A3868F00807C50 /* ASTodayVC.swift in Sources */,
 				6821BBF329A380C900807C50 /* AppDelegate.swift in Sources */,
+				6821BC1129A39B5800807C50 /* SearchResutlCell.swift in Sources */,
 				6821BBF529A380C900807C50 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
