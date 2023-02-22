@@ -11,10 +11,21 @@ class ASAppsPageVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
     
     let headerId = "headerId"
     var groups = [AppGroup]()
+    var socialApps = [SocialApps]()
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .large )
+        aiv.color = .black
+        aiv.startAnimating()
+        aiv.hidesWhenStopped = true
+        return aiv
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .systemBackground
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
         
         collectionView.register(ASAppsGroupCell.self, forCellWithReuseIdentifier: ASAppsGroupCell.identifier)
         collectionView.register(ASAppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader , withReuseIdentifier: headerId)
@@ -28,7 +39,7 @@ class ASAppsPageVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
         
         var group1: AppGroup?
         var group2: AppGroup?
-        var group3: AppGroup?
+        
         
         dispatchGroup.enter()
         NetworkManager.shared.fetchTopFree { (appGroup, error) in
@@ -48,6 +59,11 @@ class ASAppsPageVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
             }
             group2 = appGroup
         }
+        dispatchGroup.enter()
+        NetworkManager.shared.fetchSocialApps { apps, error in
+            dispatchGroup.leave()
+            self.socialApps = apps ?? []
+        }
         
         dispatchGroup.notify(queue: .main) {
             if let group = group1 {
@@ -56,20 +72,22 @@ class ASAppsPageVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
             if let group = group2 {
                 self.groups.append(group)
             }
-            if let group = group3 {
-                self.groups.append(group)
-            }
+            self.activityIndicatorView.stopAnimating()
             self.collectionView.reloadData()
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as? ASAppsPageHeader else {
+            return UICollectionReusableView()
+        }
+        header.appHeaderHorizontalController.socialApps = self.socialApps
+        header.appHeaderHorizontalController.collectionView.reloadData()
         return header
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        .init(width: view.frame.width, height: 30)
+        .init(width: view.frame.width, height: 300)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -11,6 +11,7 @@ import SDWebImage
 class ASAppsHorizontalVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
     
     var appGroup: AppGroup?
+    var socialApps: [SocialApps]?
         
     override func viewDidLoad() {
         super.viewDidLoad()

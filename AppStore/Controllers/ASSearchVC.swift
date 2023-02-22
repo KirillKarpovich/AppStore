@@ -41,7 +41,7 @@ class ASSearchVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout, UISear
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         NetworkManager.shared.search(searchTerm: searchText) { result, error in
-            self.appResults = result
+            self.appResults = result?.results ?? []
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -56,7 +56,7 @@ class ASSearchVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout, UISear
                 return
             }
             
-            self.appResults = results
+            self.appResults = results?.results ?? []
             DispatchQueue.main.async { self.collectionView.reloadData() }
         }
     }
