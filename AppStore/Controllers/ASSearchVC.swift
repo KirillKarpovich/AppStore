@@ -40,7 +40,7 @@ class ASSearchVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout, UISear
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        NetworkManager.shared.fetchApps(searchTerm: searchText) { result, error in
+        NetworkManager.shared.search(searchTerm: searchText) { result, error in
             self.appResults = result
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -49,7 +49,7 @@ class ASSearchVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout, UISear
     }
     
     private func fetchITunesApps() {
-        NetworkManager.shared.fetchApps(searchTerm: "Instagram") { (results, err) in
+        NetworkManager.shared.search(searchTerm: "Instagram") { (results, err) in
             
             if let err = err {
                 print("Failed to fetch apps:", err)

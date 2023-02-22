@@ -11,7 +11,7 @@ class NetworkManager {
     
     static let shared = NetworkManager()
     
-    func fetchApps(searchTerm: String, completion: @escaping ([Result], Error?) -> Void) {
+    func search(searchTerm: String, completion: @escaping ([Result], Error?) -> Void) {
         
         let urlString = "https://itunes.apple.com/search?term=\(searchTerm)&entity=software"
         guard let url = URL(string: urlString) else { return }
@@ -37,4 +37,32 @@ class NetworkManager {
              }.resume()
     }
     
+    func fetchTopFree(completion: @escaping (AppGroup?, Error?) -> ()) {
+        let urlString = "https://rss.applemarketingtools.com/api/v2/us/apps/top-free/10/apps.json"
+        fetchGroupApp(urlString: urlString, completion: completion)
+    }
+    
+    func fetchTopPaid(completion: @escaping (AppGroup?, Error?) -> ()) {
+        let urlString = "https://rss.applemarketingtools.com/api/v2/us/apps/top-paid/10/apps.json"
+        fetchGroupApp(urlString: urlString, completion: completion)
+    }
+    
+    func fetchGroupApp(urlString: String, completion: @escaping (AppGroup?, Error?) -> Void) {
+        guard let url = URL(string: urlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, resp, err) in
+            
+            if let err = err {
+                completion(nil, err)
+                return
+            }
+            do {
+                let appGroup = try JSONDecoder().decode(AppGroup.self, from: data!)
+                appGroup.feed.results.forEach({print($0.name)})
+                completion(appGroup, nil)
+            } catch {
+                completion(nil, error)
+            }
+        }.resume()
+    }
 }

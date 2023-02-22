@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ASAppsHorizontalVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
+    
+    var appGroup: AppGroup?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +24,16 @@ class ASAppsHorizontalVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return appGroup?.feed.results.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ASAppRowCell.identifier, for: indexPath)
-//        cell.backgroundColor = .red
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ASAppRowCell.identifier, for: indexPath) as? ASAppRowCell else { return UICollectionViewCell() }
+        let app = appGroup?.feed.results[indexPath.row]
+        cell.nameLabel.text = app?.name
+        cell.companyLabel.text = app?.artistName
+        cell.imageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
+
         return cell
     }
     
