@@ -15,9 +15,9 @@ class ASTabBarController: UITabBarController {
         view.backgroundColor = .purple
         
         viewControllers = [
+            createNavController(viewController: ASAppsPageVC(), title: "Apps", imageName: "apps"),
             createNavController(viewController: ASSearchVC(), title: "Search", imageName: "search"),
-            createNavController(viewController: ASTodayVC(), title: "Today", imageName: "today_icon"),
-            createNavController(viewController: ASAppsVC(), title: "Apps", imageName: "apps")
+            createNavController(viewController: ASTodayVC(), title: "Today", imageName: "today_icon")
         ]
     }
     

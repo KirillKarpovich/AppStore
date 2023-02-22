@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class ASSearchVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class ASSearchVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     private var appResults = [Result]()
     private let searchController = UISearchController(searchResultsController: nil)
@@ -47,15 +47,6 @@ class ASSearchVC: UICollectionViewController, UICollectionViewDelegateFlowLayout
             }
         }
     }
-    
-    init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     
     private func fetchITunesApps() {
         NetworkManager.shared.fetchApps(searchTerm: "Instagram") { (results, err) in
