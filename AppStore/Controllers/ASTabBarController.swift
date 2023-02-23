@@ -12,7 +12,7 @@ class ASTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .purple
+        view.backgroundColor = .white
         
         viewControllers = [
             createNavController(viewController: ASAppsPageVC(), title: "Apps", imageName: "apps"),

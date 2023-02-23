@@ -19,12 +19,12 @@ class NetworkManager {
     }
     
     func fetchTopFree(completion: @escaping (AppGroup?, Error?) -> ()) {
-        let urlString = "https://rss.applemarketingtools.com/api/v2/us/apps/top-free/10/apps.json"
+        let urlString = "https://rss.applemarketingtools.com/api/v2/us/apps/top-free/25/apps.json"
         fetchGroupApp(urlString: urlString, completion: completion)
     }
     
     func fetchTopPaid(completion: @escaping (AppGroup?, Error?) -> ()) {
-        let urlString = "https://rss.applemarketingtools.com/api/v2/us/apps/top-paid/10/apps.json"
+        let urlString = "https://rss.applemarketingtools.com/api/v2/us/apps/top-paid/25/apps.json"
         fetchGroupApp(urlString: urlString, completion: completion)
     }
     
@@ -38,9 +38,7 @@ class NetworkManager {
     }
     
     func fetchGenericJSONData<T: Decodable>(urlString: String, completion: @escaping (T?, Error?) -> ()) {
-        
-        print("T is type:", T.self)
-        
+                
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { (data, resp, err) in
             if let err = err {
@@ -49,7 +47,6 @@ class NetworkManager {
             }
             do {
                 let objects = try JSONDecoder().decode(T.self, from: data!)
-                // success
                 completion(objects, nil)
             } catch {
                 completion(nil, error)

@@ -11,12 +11,16 @@ import SDWebImage
 class ASAppsHorizontalVC: HorizontalSnappingVC, UICollectionViewDelegateFlowLayout {
     
     var appGroup: AppGroup?
+    
+    var didSelectHandler: ((FeedResult) -> ())?
         
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .systemBackground
         
         collectionView.register(ASAppRowCell.self, forCellWithReuseIdentifier: ASAppRowCell.identifier)
+        
+        collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
         
     }
     
@@ -46,8 +50,11 @@ class ASAppsHorizontalVC: HorizontalSnappingVC, UICollectionViewDelegateFlowLayo
         return lineSpacing
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: topBottomPadding, left: 16, bottom: topBottomPadding, right: 16)
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let app = appGroup?.feed.results[indexPath.item] {
+            didSelectHandler?(app)
+
+        }
     }
     
 }

@@ -29,14 +29,11 @@ class SnappingLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else { return super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity) }
         let parent = super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity)
         
-        // we're using a magical 48
         let itemWidth = collectionView.frame.width - 48
         
         let itemSpace = itemWidth + minimumInteritemSpacing
         var pageNumber = round(collectionView.contentOffset.x / itemSpace)
         
-        // Skip to the next cell, if there is residual scrolling velocity left.
-        // This helps to prevent glitches
         let vX = velocity.x
         if vX > 0 {
             pageNumber += 1
