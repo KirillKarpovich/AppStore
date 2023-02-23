@@ -8,10 +8,9 @@
 import UIKit
 import SDWebImage
 
-class ASAppsHorizontalVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
+class ASAppsHorizontalVC: HorizontalSnappingVC, UICollectionViewDelegateFlowLayout {
     
     var appGroup: AppGroup?
-    var socialApps: [SocialApps]?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,9 +18,6 @@ class ASAppsHorizontalVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout
         
         collectionView.register(ASAppRowCell.self, forCellWithReuseIdentifier: ASAppRowCell.identifier)
         
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

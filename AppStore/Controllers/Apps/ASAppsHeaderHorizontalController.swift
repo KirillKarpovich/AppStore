@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ASAppsHeaderHorizontalController: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
+class ASAppsHeaderHorizontalController: HorizontalSnappingVC, UICollectionViewDelegateFlowLayout {
         
     var socialApps = [SocialApps]()
     
@@ -16,10 +16,6 @@ class ASAppsHeaderHorizontalController: ASBaseCollectionVC, UICollectionViewDele
         collectionView.backgroundColor = .white
         
         collectionView.register(ASAppsHeaderCell.self, forCellWithReuseIdentifier: ASAppsHeaderCell.identifier)
-        
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
