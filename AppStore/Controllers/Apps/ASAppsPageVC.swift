@@ -104,9 +104,8 @@ class ASAppsPageVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
         
         cell.horizontalController.didSelectHandler = { [weak self] feedResult in
             guard let self else { return }
-            let detailVC = ASAppDetailVC()
+            let detailVC = ASAppDetailVC(appId: feedResult.id)
             detailVC.navigationItem.title = feedResult.name
-            detailVC.appId = feedResult.id
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
         return cell

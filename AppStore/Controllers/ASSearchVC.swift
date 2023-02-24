@@ -77,4 +77,10 @@ class ASSearchVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout, UISear
         return appResults.count
        
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let appId = String(appResults[indexPath.item].trackId)
+        let detailVC = ASAppDetailVC(appId: appId)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }

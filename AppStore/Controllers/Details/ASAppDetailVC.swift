@@ -9,21 +9,17 @@ import UIKit
 
 class ASAppDetailVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
     
-    var appId: String! {
-        didSet {
-            let urlString = "https://itunes.apple.com/lookup?id=\(appId ?? "")"
-            NetworkManager.shared.fetchGenericJSONData(urlString: urlString) { (result: SearchResult?, err) in
-                let app = result?.results.first
-                self.app = app
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            }
-        }
-    }
-    
+    private let appId: String
     var app: Result?
     
+    init(appId: String) {
+        self.appId = appId
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +28,18 @@ class ASAppDetailVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
         collectionView.register(ASAppDetailCell.self, forCellWithReuseIdentifier: ASAppDetailCell.identifier)
         collectionView.register(ASPreviewCell.self, forCellWithReuseIdentifier: ASPreviewCell.identifier)
         navigationItem.largeTitleDisplayMode = .never
+        fetchData()
+    }
+    
+    private func fetchData() {
+        let urlString = "https://itunes.apple.com/lookup?id=\(appId)"
+        NetworkManager.shared.fetchGenericJSONData(urlString: urlString) { (result: SearchResult?, err) in
+            let app = result?.results.first
+            self.app = app
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

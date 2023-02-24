@@ -16,17 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Cbh-1n-t8N">
-                                <rect key="frame" x="76" y="274" width="240" height="176"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appstore" translatesAutoresizingMaskIntoConstraints="NO" id="LtL-Qm-6ti">
+                                <rect key="frame" x="76" y="267" width="240" height="194"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Cbh-1n-t8N" secondAttribute="bottom" constant="368" id="1wv-14-wDw"/>
-                            <constraint firstItem="Cbh-1n-t8N" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="215" id="2tv-eJ-83n"/>
-                            <constraint firstItem="Cbh-1n-t8N" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="O77-7x-Hvw"/>
-                            <constraint firstItem="Cbh-1n-t8N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="76" id="gwI-qT-ZRx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LtL-Qm-6ti" secondAttribute="trailing" constant="77" id="XaL-I1-2KC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LtL-Qm-6ti" secondAttribute="bottom" constant="357" id="p9j-4E-tI6"/>
+                            <constraint firstItem="LtL-Qm-6ti" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="76" id="rPN-DC-RRK"/>
+                            <constraint firstItem="LtL-Qm-6ti" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="208" id="ufo-NT-4gf"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -36,7 +36,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="256" height="256"/>
+        <image name="appstore" width="1024" height="1024"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
