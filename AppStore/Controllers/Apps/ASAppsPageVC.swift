@@ -9,7 +9,6 @@ import UIKit
 
 class ASAppsPageVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
     
-    let headerId = "headerId"
     var groups = [AppGroup]()
     var socialApps = [SocialApps]()
     
@@ -28,7 +27,7 @@ class ASAppsPageVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
         activityIndicatorView.fillSuperview()
         
         collectionView.register(ASAppsGroupCell.self, forCellWithReuseIdentifier: ASAppsGroupCell.identifier)
-        collectionView.register(ASAppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader , withReuseIdentifier: headerId)
+        collectionView.register(ASAppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader , withReuseIdentifier: ASAppsPageHeader.identifier)
         
         fetchData()
     }
@@ -78,7 +77,7 @@ class ASAppsPageVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as? ASAppsPageHeader else {
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ASAppsPageHeader.identifier, for: indexPath) as? ASAppsPageHeader else {
             return UICollectionReusableView()
         }
         header.appHeaderHorizontalController.socialApps = self.socialApps
