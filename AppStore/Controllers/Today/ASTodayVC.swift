@@ -8,7 +8,19 @@
 import UIKit
 
 class ASTodayVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
-        
+    
+    var topConstraint: NSLayoutConstraint?
+    var leadingConstraint: NSLayoutConstraint?
+    var widthConstraint: NSLayoutConstraint?
+    var heightConstraint: NSLayoutConstraint?
+    
+    var detailVC: ASTodayDetailVC!
+    
+    let items = [
+        TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligently organize your life the right way.", backgroundColor: .white),
+        TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Find out all you need to know on how to travel without packing everything!", backgroundColor: #colorLiteral(red: 0.9838578105, green: 0.9588007331, blue: 0.7274674177, alpha: 1))
+    ]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,38 +32,78 @@ class ASTodayVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let redView = UIView()
-        redView.backgroundColor = .red
-        redView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleRemoveRedView)))
-        view.addSubview(redView)
+        
+        let detailVC = ASTodayDetailVC()
+        detailVC.dismissHandler = {
+            self.handleRemoveRedView()
+        }
+        detailVC.todayItem = items[indexPath.item]
+        detailVC.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleRemoveRedView)))
+       
+        let detailV = detailVC.view!
+        addChild(detailVC)
+        view.addSubview(detailV)
+        
+        self.detailVC = detailVC
         
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
         
         guard let startingFrame = cell.superview?.convert(cell.frame, to: nil) else { return }
         
         self.startingFrame = startingFrame
-        redView.frame = startingFrame
-        redView.layer.cornerRadius = 16
+        
+        detailV.translatesAutoresizingMaskIntoConstraints = false
+        topConstraint = detailV.topAnchor.constraint(equalTo: view.topAnchor, constant: startingFrame.origin.y)
+        leadingConstraint = detailV.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: startingFrame.origin.x)
+        widthConstraint = detailV.widthAnchor.constraint(equalToConstant: startingFrame.width)
+        heightConstraint = detailV.heightAnchor.constraint(equalToConstant: startingFrame.height)
+        
+        [topConstraint, leadingConstraint, widthConstraint, heightConstraint].forEach({$0?.isActive = true})
+        
+        self.view.layoutIfNeeded()
+        detailV.layer.cornerRadius = 16
         
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
-            redView.frame = self.view.frame
+
+            
+            self.topConstraint?.constant = 0
+            self.leadingConstraint?.constant = 0
+            self.widthConstraint?.constant = self.view.frame.width
+            self.heightConstraint?.constant = self.view.frame.height
+            
+            self.view.layoutIfNeeded()
+            
+            self.tabBarController?.tabBar.frame.origin.y = self.view.frame.size.height
+
         }, completion: nil)
     }
     
     var startingFrame: CGRect?
     
-    @objc func handleRemoveRedView(gesture: UITapGestureRecognizer) {
-//        gesture.view?.removeFromSuperview()
-        // access startingFrame
+    @objc func handleRemoveRedView() {
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
-            gesture.view?.frame = self.startingFrame ?? .zero
+
+//            self.detailVC.tableView.contentOffset = .zero
+            
+            guard let startingFrame = self.startingFrame else { return }
+            self.topConstraint?.constant = startingFrame.origin.y
+            self.leadingConstraint?.constant = startingFrame.origin.x
+            self.widthConstraint?.constant = startingFrame.width
+            self.heightConstraint?.constant = startingFrame.height
+            
+            self.view.layoutIfNeeded()
+            
+            if let tabBarFrame = self.tabBarController?.tabBar.frame {
+                self.tabBarController?.tabBar.frame.origin.y = self.view.frame.size.height - tabBarFrame.height
+            }
         }, completion: { _ in
-            gesture.view?.removeFromSuperview()
+            self.detailVC.view.removeFromSuperview()
+            self.detailVC.removeFromParent()
         })
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return items.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -59,6 +111,7 @@ class ASTodayVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
         else {
             return UICollectionViewCell()
         }
+        cell.todayItem = items[indexPath.item]
         return cell
     }
     
