@@ -27,8 +27,6 @@ class ASSearchVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout, UISear
         collectionView.register(SearchResutlCell.self, forCellWithReuseIdentifier: SearchResutlCell.identifier)
         collectionView.addSubview(searchLabel)
         searchLabel.fillSuperview(padding: .init(top: 100, left: 30, bottom: 0, right: 0))
-        
-//        fetchITunesApps()
         setupSearchBar()
     }
     

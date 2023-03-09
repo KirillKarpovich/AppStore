@@ -27,5 +27,4 @@ class ASPreviewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
-    
 }

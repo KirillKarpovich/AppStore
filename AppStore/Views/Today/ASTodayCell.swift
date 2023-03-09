@@ -9,13 +9,15 @@ import UIKit
 
 class ASTodayCell: UICollectionViewCell {
     static let identifier = String(describing: ASTodayCell.self)
-    
+        
    var todayItem: TodayItem! {
        didSet {
            categoryLabel.text = todayItem.category
            titleLabel.text = todayItem.title
            imageView.image = todayItem.image
            descriptionLabel.text = todayItem.description
+           
+           backgroundColor = todayItem.backgroundColor
        }
    }
    
@@ -35,6 +37,9 @@ class ASTodayCell: UICollectionViewCell {
        clipsToBounds = true
        layer.cornerRadius = 16
        
+       layer.shadowOpacity = 0.5
+       layer.shadowRadius = 10
+              
        imageView.contentMode = .scaleAspectFill
        
        let imageContainerView = UIView()
@@ -55,6 +60,5 @@ class ASTodayCell: UICollectionViewCell {
    required init?(coder aDecoder: NSCoder) {
        fatalError()
    }
-   
 }
 

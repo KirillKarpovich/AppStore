@@ -46,10 +46,10 @@ class ASTodayVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
         
         self.detailVC = detailVC
         
+        self.collectionView.isUserInteractionEnabled = false
+        
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        
         guard let startingFrame = cell.superview?.convert(cell.frame, to: nil) else { return }
-        
         self.startingFrame = startingFrame
         
         detailV.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +65,6 @@ class ASTodayVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
         
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
 
-            
             self.topConstraint?.constant = 0
             self.leadingConstraint?.constant = 0
             self.widthConstraint?.constant = self.view.frame.width
@@ -74,6 +73,11 @@ class ASTodayVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
             self.view.layoutIfNeeded()
             
             self.tabBarController?.tabBar.frame.origin.y = self.view.frame.size.height
+            
+            guard let cell = self.detailVC.tableView.cellForRow(at: [0, 0]) as? ASTodayDetailHeaderCell else { return }
+            
+            cell.todayCell.topConstraint.constant = 48
+            cell.layoutIfNeeded()
 
         }, completion: nil)
     }
@@ -82,9 +86,7 @@ class ASTodayVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
     
     @objc func handleRemoveRedView() {
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
-
-//            self.detailVC.tableView.contentOffset = .zero
-            
+                        
             guard let startingFrame = self.startingFrame else { return }
             self.topConstraint?.constant = startingFrame.origin.y
             self.leadingConstraint?.constant = startingFrame.origin.x
@@ -96,9 +98,15 @@ class ASTodayVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
             if let tabBarFrame = self.tabBarController?.tabBar.frame {
                 self.tabBarController?.tabBar.frame.origin.y = self.view.frame.size.height - tabBarFrame.height
             }
+            guard let cell = self.detailVC.tableView.cellForRow(at: [0, 0]) as? ASTodayDetailHeaderCell else { return }
+            
+            cell.todayCell.topConstraint.constant = 24
+            cell.layoutIfNeeded()
+            
         }, completion: { _ in
             self.detailVC.view.removeFromSuperview()
             self.detailVC.removeFromParent()
+            self.collectionView.isUserInteractionEnabled = true
         })
     }
     
@@ -126,5 +134,4 @@ class ASTodayVC: ASBaseCollectionVC, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: 32, left: 0, bottom: 32, right: 0)
     }
-    
 }

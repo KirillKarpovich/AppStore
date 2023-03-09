@@ -37,7 +37,6 @@ class BetterSnappingLayout: UICollectionViewFlowLayout {
                 offsetAdjustment = itemOffset - horizontalOffset
             }
         })
-        
         return CGPoint(x: proposedContentOffset.x + offsetAdjustment, y: proposedContentOffset.y)
     }
 }
