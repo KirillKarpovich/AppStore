@@ -6,8 +6,7 @@
 
 ![ScreenShot](https://user-images.githubusercontent.com/120652830/224257378-52d2c66e-3814-4f6e-ac1b-18e3165ee96c.jpeg)
 
-This project is a mock up AppStore Application using JSON APIs from Apple's iTunes Search API. This application is built with [LBTA course](https://www.letsbuildthatapp.com/course/AppStore%20JSON%20APIs).
-
+This project is a mock up AppStore Application using JSON APIs from Apple's iTunes Search API. 
 
 ### What Techniques I used
 * UICollectionView, UITableView
@@ -24,14 +23,3 @@ This project is a mock up AppStore Application using JSON APIs from Apple's iTun
 ### Cocoapods
 * SDWebImage
 
-&nbsp;
-
- ![SwiftUI](/images/SwiftUI.png)
-
-### UIcollectionView CompositionalLayout
-Layout Apps page using a single CollectionView with a Compositional Layout
-
-**Techniques**
-1. Use **Sections**, **Groups**, **Items** to place cells horizontally and vertically
-2. Use **orthogonalBehavior** for snapping and paging when swiping
-3. Manage multiples sctions with **SectionProvider**
