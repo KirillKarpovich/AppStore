@@ -10,14 +10,13 @@ This project is a mock up AppStore Application using JSON APIs from Apple's iTun
 
 ### What Techniques I used
 * UICollectionView, UITableView
-* Search Bar Controller Throttling
+* Search Bar Controller 
 * DispatchGroup
 * Generics JSON Data Fetching
 * Snapping Collection View Layout
 * JSON Custom CodingKeys
 * Transition Animations
-* CGAffineTransform
-* UIPanGestureRecognizer, UIVisualEffectView
+* UIPanGestureRecognizer
 * Pagination
 
 ### Cocoapods
